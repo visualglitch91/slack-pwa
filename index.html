@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PWA Hello World</title>
+    <link rel="manifest" href="manifest.json">
+    <style>
+        body {
+            font-family: monospace;
+            background-color: #1e1e2e;
+            color: #cdd6f4;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        p {
+            font-size: 1.5rem;
+        }
+        button {
+            background-color: #f38ba8;
+            color: #1e1e2e;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1rem;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #eba0ac;
+        }
+    </style>
+</head>
+<body>
+    <p>Redirecting in <span id="countdown">5</span> seconds...</p>
+    <button onclick="cancelRedirect()">Cancel</button>
+    <script>
+        let seconds = 5;
+        let countdown = document.getElementById("countdown");
+        let redirectTimer = setInterval(() => {
+            seconds--;
+            countdown.textContent = seconds;
+            if (seconds <= 0) {
+                clearInterval(redirectTimer);
+                window.location.href = "https://app.slack.com/client";
+            }
+        }, 1000);
+        
+        function cancelRedirect() {
+            clearInterval(redirectTimer);
+            countdown.textContent = "Cancelled";
+        }
+    </script>
+</body>
+</html>
